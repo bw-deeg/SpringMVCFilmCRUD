@@ -16,6 +16,12 @@ public class FilmController {
 	@Autowired
 	private DatabaseAccessor dao;
 	
+	public void anthonysMethod() {
+		//Anthony wrote this code
+		System.out.println("Ant");
+		System.out.println("More Code In Mine -- Anthony Wuz Here");
+	}
+	
 	@GetMapping(path={"", "/", "index", "index.do"        } )
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView();
@@ -32,10 +38,7 @@ public class FilmController {
 		return "film";
 	}
 	
-	public void anthonysMethod() {
-		//Anthony wrote this code
-		System.out.println("Ant");
-	}
+
 
 	public void sddeeMethod() {
 		System.out.println("mine all mine!");
