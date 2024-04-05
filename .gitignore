@@ -6,4 +6,4 @@ target
 *.war
 .gradle
 .classpath
-
+.settings
