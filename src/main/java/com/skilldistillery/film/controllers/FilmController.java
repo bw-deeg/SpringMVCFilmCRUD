@@ -31,5 +31,10 @@ public class FilmController {
 		System.out.println(film);
 		return "film";
 	}
+	
+	public void anthonysMethod() {
+		//Anthony wrote this code
+		System.out.println("Ant");
+	}
 
 }
