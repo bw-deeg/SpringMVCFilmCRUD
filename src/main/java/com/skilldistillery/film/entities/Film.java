@@ -35,6 +35,12 @@ public class Film {
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
 	}
+
+	@Override
+	public String toString() {
+		return "Film [id=" + id + ", rating=" + rating + ", specialFeatures=" + specialFeatures + ", languageId="
+				+ languageId + ", releaseYear=" + releaseYear + "]";
+	}
 	
 	
 }
