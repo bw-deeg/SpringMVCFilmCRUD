@@ -32,4 +32,7 @@ public class FilmController {
 		return "film";
 	}
 
+	public void sddeeMethod() {
+		System.out.println("mine all mine!");
+	}
 }
