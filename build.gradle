@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: 'war'
+
+war {
+  archiveFileName = "${archivesBaseName}.war"
+  destinationDirectory = file("./")      // Project root
+}
+
+ext {
+  springVersion = "6.1.1"
+  mySqlConnectorVersion = "8.0.33"
+  junit5MinorVersion = "10"
+  junit5Version = "5.$junit5MinorVersion.1"
+  junit5PlatformLauncherVersion = "1.$junit5MinorVersion.1"
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+    implementation group: 'org.springframework', name: 'spring-webmvc', version:"$springVersion"
+    
+    // For JSP views
+    implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.0'
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.0'
+    compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.0.0'
+
+
+    // MySQL Driver
+    implementation "mysql:mysql-connector-java:$mySqlConnectorVersion"
+    
+    // For JUnit Testing
+    implementation group: 'org.springframework', name: 'spring-test', version:"$springVersion"
+    implementation group: 'org.hamcrest', name: 'hamcrest-library', version:'2.2'
+    testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version:"$junit5Version"
+    testImplementation group: 'org.junit.platform', name: 'junit-platform-launcher', version:"$junit5PlatformLauncherVersion"
+    testImplementation("org.junit.jupiter:junit-jupiter:$junit5Version")
+}
