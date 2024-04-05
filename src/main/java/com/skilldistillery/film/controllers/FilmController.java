@@ -29,7 +29,6 @@ public class FilmController {
 		Film film = dao.findFilmById(id);
 		model.addAttribute("film", film);
 		System.out.println(film);
-		System.out.println(film);
 		return "film";
 	}
 

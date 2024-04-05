@@ -205,7 +205,50 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	@Override
 	public Film findFilmById(int filmId) {
-		return null;
+		Film film = null;
+		Boolean getKeys = false;
+		String user = "student";
+		String pass = "student";
+
+		String sql = "SELECT * FROM film WHERE id = ? ORDER BY film.id";
+
+		try {Connection conn = DriverManager.getConnection(URL, user, pass);
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setInt(1, filmId);
+				ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				// populate
+				film = new Film(filmId, rs.getString("title"), rs.getString("description"), rs.getInt("release_Year"),
+						rs.getInt("rental_Duration"), rs.getDouble("rental_Rate"), rs.getInt("length"),
+						rs.getDouble("replacement_cost"), rs.getString("rating"), rs.getString("special_Features"),
+						getLanguage(rs.getInt("language_id")));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return film;
+	}
+	
+	private String getLanguage(int id) {
+		String name = null;
+		boolean getKeys = false;
+		String user = "student";
+		String pass = "student";
+
+		String sql = "SELECT name FROM language WHERE id = ?";
+		try (Connection conn = DriverManager.getConnection(URL, user, pass);
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();) {
+			if (rs.next()) {
+				name = rs.getString("name");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return name;
 	}
 
 	@Override
@@ -240,8 +283,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				String rating = rs.getString("rating");
 				String features = rs.getString("special_features");
 
-				Film film = new Film(filmId, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating,
-						features);
+				Film film = new Film(1, title, desc, null, length, rate, null, repCost, rating, features, features);
 
 				films.add(film);
 			}
