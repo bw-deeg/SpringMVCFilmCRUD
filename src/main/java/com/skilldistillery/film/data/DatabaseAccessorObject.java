@@ -238,9 +238,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		String pass = "student";
 
 		String sql = "SELECT name FROM language WHERE id = ?";
-		try (Connection conn = DriverManager.getConnection(URL, user, pass);
+		try {Connection conn = DriverManager.getConnection(URL, user, pass);
 				PreparedStatement ps = conn.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery();) {
+				ps.setInt(1, id);
+				ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				name = rs.getString("name");
 			}
